@@ -19,7 +19,7 @@ Product.belongsToMany(Tags,{
 Tag.belongsToMany(Product,{
   through:{
     model:ProductTag
-  }
+  },
 });
 
 module.exports = {
