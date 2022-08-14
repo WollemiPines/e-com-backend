@@ -7,10 +7,10 @@ const ProductTag = require('./ProductTag');
 Product.belongsTo(Category,{
 });
 
-Category.hasMany(Products,{
+Category.hasMany(Product,{
 });
 
-Product.belongsToMany(Tags,{
+Product.belongsToMany(Tag,{
   through:{
     model: ProductTag,
   },
