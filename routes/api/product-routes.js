@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
-      include: [{ model: Category }, {model: Tag}],
+      include: [{ model: Category }],
     });
 
     if (!productData) {
@@ -32,29 +32,7 @@ router.get('/:id', async (req, res) => {
 });
 
 
-// create new product
-// router.post('/', async (req, res) => {
-//   try {
-//     const productData = await Product.create({
-//       product_name: req.body.product_name,
-//       price: req.body.price,
-//       stock: req.body.stock,
-//     });
-//     res.status(200).json(productData);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
-
 router.post('/', (req, res) => {
-            /* req.body should look like this...
-              {
-                product_name: "Basketball",
-                price: 200.00,
-                stock: 3,
-                tagIds: [1, 2, 3, 4]
-              }
-            */
 router.post('/', async (req, res) => {
     try {
       const productData = await Product.create({

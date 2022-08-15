@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const tagsData = await Tag.findByPk(req.params.id, {
-      include: [{ model: Product }],
+      where: {tags_id : req.params.id}
     });
 
     if (!tagsData) {
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const tagsData = await Tag.create({
-      tag_id: req.body.tag_id,
+      tag_name: req.body.tag_name,
     });
     res.status(200).json(tagsData);
   } catch (err) {
@@ -45,10 +45,9 @@ router.post('/', async (req, res) => {
   // update a tag's name by its `id` value
 router.put('/:id',async  (req, res) => {
   try {
-  const selId= await selId.findOne({ where: { tag_id: req.body.tag_id } });
-  selId.name = req.body.name 
-  await selId.save()
-res.status(200).json(selId);
+  const tagsData= await Tag.update(req.body,
+    { where: { id: req.params.id, } });
+res.status(200).json(tagsData);
 } catch (err) {
   res.status(400).json(err);
 }
